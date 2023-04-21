@@ -1,25 +1,28 @@
 import axios from "axios";
 
-const API_URL = "APIURL"; //
+const API_URL = "/api/task"; //
 
-const createTask = async (taskData, userName) => {
-  const response = await axios.post(API_URL, taskData);
+export const createTask = async (taskData, name) => {
+  const response = await axios.post(`${API_URL}/${name}/task`, taskData);
   if (response.data) {
+    console.log(response.data);
     return response.data;
   }
 };
 
-const deleteTask = async (taskId, userName) => {
-  const response = await axios.delete(API_URL + taskId, userName);
+export const deleteTask = async (id, name) => {
+  console.log(id, name);
+  const response = await axios.delete(`${API_URL}/${name}/${id}/delete`);
 };
-const updateTask = async (taskId, taskData, userName) => {
-  const response = await axios.put(API_URL, taskData);
+export const updateTask = async (id, taskData, name) => {
+  const response = await axios.put(`${API_URL}/${name}/${id}/edit`, taskData);
+  console.log(taskData);
   if (response.data) {
     return response.data;
   }
 };
-const getTasks = async (userName) => {
-  const response = await axios.get(API_URL + userName);
+export const getTasks = async (name) => {
+  const response = await axios.get(`${API_URL}/${name}`);
   if (response.data) {
     return response.data;
   }
